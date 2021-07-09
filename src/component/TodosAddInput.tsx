@@ -15,7 +15,8 @@ const TodosAddInput = () => {
 }
 
 const DivContainer = styled.div({
-    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
 })
 
 export default TodosAddInput
