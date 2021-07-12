@@ -17,6 +17,8 @@ const initialState: TodoList = {
 
 const actionPrefix = 'TODOS'
 const addTodos = createAction<object>(`${actionPrefix}/add`)
+const toggleTodos = createAction<object>(`${actionPrefix}/toggle`)
+
 const GENERATE_RANDOM_STRING_OPTION = 5
 
 const reducers = {
@@ -28,6 +30,12 @@ const reducers = {
         }
 
         list.push(newTodo)
+    },
+
+    toggle: ({list}: TodoList, {payload: {id, isDone}}: PayloadAction<Todo>) => {
+        const targetIndex = list.findIndex((item: Todo) => item.id === id)
+
+        list[targetIndex].isDone = !isDone
     },
 }
 
@@ -44,6 +52,7 @@ export const selectTodoList = createSelector(
 
 export const actions = {
     addTodos,
+    toggleTodos,
 }
 
 export const rootReducer = combineReducers({

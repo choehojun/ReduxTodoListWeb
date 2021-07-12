@@ -7,9 +7,11 @@ import {actions} from '../features'
 const TodosAddInput = () => {
     const dispatch = useDispatch()
     const [inputText, setInputText] = useState('')
+
     const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setInputText(e.target.value)
     }, [setInputText])
+
     const handleButtonClick = useCallback(() => {
         if(!inputText.trim()) {
             alert('할 일을 입력해주세요.')
@@ -21,6 +23,7 @@ const TodosAddInput = () => {
         }))
         setInputText('')
     }, [dispatch, inputText, setInputText])
+
     return (
         <DivContainer>
             <Input

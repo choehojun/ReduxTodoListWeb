@@ -7,11 +7,12 @@ import {Header} from 'semantic-ui-react'
 
 const TodosList = () => {
     const todoList = useSelector<RootState, Todo[]>(state => selectTodoList(state.todos))
+
     return (
         <DivContainer>
             <Header as='h1'>할 일 목록</Header>
             {todoList.map((item: Todo) => (
-                <TodoItems text={item.text}/>
+                <TodoItems item={item}/>
             ))}
         </DivContainer>
     )

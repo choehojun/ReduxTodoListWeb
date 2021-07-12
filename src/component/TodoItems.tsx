@@ -1,23 +1,26 @@
-import React, {useState} from 'react'
+import React, {useCallback, useState} from 'react'
 import styled from '@emotion/styled'
 import {Checkbox, Button} from 'semantic-ui-react'
+import {actions, Todo} from '../features'
+import {useDispatch} from 'react-redux'
 
 interface Props {
-    text: string
+    item: Todo
 }
 
-export const TodoItems = ({text}: Props) => {
-    const [isChecked, setIsChecked] = useState(false)
+export const TodoItems = ({item}: Props) => {
+    const dispatch = useDispatch()
+
+    const handleCheckboxChange = useCallback((item: Todo) => {
+        dispatch(actions.toggleTodos(item))
+    }, [dispatch])
+
     return (
         <ItemContainer>
-            <Checkbox
-                onChange={() => {
-                    setIsChecked(prev => !prev)
-                }}
-            />
+            <Checkbox onChange={handleCheckboxChange.bind({}, item)}/>
             <text
                 style={{
-                    textDecoration: isChecked ? 'line-through' : 'none',
+                    textDecoration: item.isDone ? 'line-through' : 'none',
                     fontSize: 15,
                     fontWeight: 'normal',
                     width: 125,
@@ -25,7 +28,7 @@ export const TodoItems = ({text}: Props) => {
                     marginLeft: 10,
                 }}
             >
-                {text}
+                {item.text}
             </text>
             <Button>삭제</Button>
         </ItemContainer>
