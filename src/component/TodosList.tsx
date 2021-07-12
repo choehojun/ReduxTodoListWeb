@@ -1,15 +1,18 @@
 import React from 'react'
-import {Header} from 'semantic-ui-react'
 import styled from '@emotion/styled'
+import {selectTodoList, RootState, Todo} from '../features'
+import {useSelector} from 'react-redux'
 import {TodoItems} from './TodoItems'
+import {Header} from 'semantic-ui-react'
 
 const TodosList = () => {
+    const todoList = useSelector<RootState, Todo[]>(state => selectTodoList(state.todos))
     return (
         <DivContainer>
             <Header as='h1'>할 일 목록</Header>
-            <TodoItems text='시장 가기' />
-            <TodoItems text='공부 하기' />
-            <TodoItems text='잠 자기' />
+            {todoList.map((item: Todo) => (
+                <TodoItems text={item.text}/>
+            ))}
         </DivContainer>
     )
 }
