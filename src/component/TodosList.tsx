@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {Header} from 'semantic-ui-react'
 import styled from '@emotion/styled'
 import {TodoItems} from './TodoItems'
