@@ -13,7 +13,7 @@ const TodosAddInput = () => {
     }, [setInputText])
 
     const handleButtonClick = useCallback(() => {
-        if(!inputText.trim()) {
+        if (!inputText.trim()) {
             alert('할 일을 입력해주세요.')
             return
         }

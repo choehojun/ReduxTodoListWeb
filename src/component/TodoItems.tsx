@@ -24,14 +24,17 @@ export const TodoItems = ({item}: Props) => {
     const handleTextChange = useCallback((memo: string) => {
         const copyItem = {
             id: item.id,
-            memo: memo
+            memo: memo,
         }
         dispatch(actions.memoTodos(copyItem))
     }, [dispatch])
 
     return (
         <ItemContainer>
-            <Checkbox checked={item.isDone} onChange={handleCheckboxChange.bind({}, item)}/>
+            <Checkbox
+                checked={item.isDone}
+                onChange={handleCheckboxChange.bind({}, item)}
+            />
             <text
                 style={{
                     textDecoration: item.isDone ? 'line-through' : 'none',

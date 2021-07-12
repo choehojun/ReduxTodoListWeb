@@ -6,8 +6,8 @@ import TodosAddInput from './component/TodosAddInput'
 const Main = () => {
     return (
         <Container>
-            <TodosList />
-            <TodosAddInput />
+            <TodosList/>
+            <TodosAddInput/>
         </Container>
     )
 }
