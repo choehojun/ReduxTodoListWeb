@@ -5,6 +5,7 @@ export interface Todo {
     id: string
     text: string
     isDone: boolean
+    memo: string
 }
 
 export interface TodoList {
@@ -19,6 +20,7 @@ const actionPrefix = 'TODOS'
 const addTodos = createAction<object>(`${actionPrefix}/add`)
 const toggleTodos = createAction<object>(`${actionPrefix}/toggle`)
 const deleteTodos = createAction<object>(`${actionPrefix}/delete`)
+const memoTodos = createAction<object>(`${actionPrefix}/memo`)
 
 const GENERATE_RANDOM_STRING_OPTION = 5
 
@@ -28,6 +30,7 @@ const reducers = {
             id: generateRandomStr(GENERATE_RANDOM_STRING_OPTION),
             text,
             isDone,
+            memo: '',
         }
 
         list.push(newTodo)
@@ -43,7 +46,13 @@ const reducers = {
         const targetIndex = list.findIndex((item: Todo) => item.id === id)
 
         list.splice(targetIndex, 1)
-    }
+    },
+
+    memo: ({list}: TodoList, {payload: {id, memo}}: PayloadAction<Todo>) => {
+        const targetIndex = list.findIndex((item: Todo) => item.id === id)
+
+        list[targetIndex].memo = memo
+    },
 }
 
 const todoSlice = createSlice({
@@ -61,6 +70,7 @@ export const actions = {
     addTodos,
     toggleTodos,
     deleteTodos,
+    memoTodos,
 }
 
 export const rootReducer = combineReducers({

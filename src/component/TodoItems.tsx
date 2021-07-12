@@ -1,8 +1,9 @@
-import React, {useCallback} from 'react'
+import React, {useCallback, useState} from 'react'
 import styled from '@emotion/styled'
-import {Checkbox, Button} from 'semantic-ui-react'
+import {Checkbox, Button, TextArea} from 'semantic-ui-react'
 import {actions, Todo} from '../features'
 import {useDispatch} from 'react-redux'
+import Modal from 'react-modal'
 
 interface Props {
     item: Todo
@@ -10,6 +11,7 @@ interface Props {
 
 export const TodoItems = ({item}: Props) => {
     const dispatch = useDispatch()
+    const [isOpen, setIsOpen] = useState(false)
 
     const handleCheckboxChange = useCallback((item: Todo) => {
         dispatch(actions.toggleTodos(item))
@@ -19,9 +21,17 @@ export const TodoItems = ({item}: Props) => {
         dispatch(actions.deleteTodos(item))
     }, [dispatch])
 
+    const handleTextChange = useCallback((memo: string) => {
+        const copyItem = {
+            id: item.id,
+            memo: memo
+        }
+        dispatch(actions.memoTodos(copyItem))
+    }, [dispatch])
+
     return (
         <ItemContainer>
-            <Checkbox onChange={handleCheckboxChange.bind({}, item)}/>
+            <Checkbox checked={item.isDone} onChange={handleCheckboxChange.bind({}, item)}/>
             <text
                 style={{
                     textDecoration: item.isDone ? 'line-through' : 'none',
@@ -31,12 +41,29 @@ export const TodoItems = ({item}: Props) => {
                     textAlign: 'start',
                     marginLeft: 10,
                 }}
+                onClick={() => setIsOpen(true)}
             >
                 {item.text}
             </text>
             <Button onClick={handleButtonClick.bind({}, item)}>
                 삭제
             </Button>
+            <Modal
+                isOpen={isOpen}
+                onRequestClose={() => setIsOpen(false)}
+            >
+                <ModalContentContainer>
+                    <TextAreaContainer
+                        value={item.memo}
+                        onChange={(e) => {
+                            handleTextChange(e.target.value)
+                        }}
+                    />
+                    <ButtonContainer onClick={() => setIsOpen(false)}>
+                        닫기
+                    </ButtonContainer>
+                </ModalContentContainer>
+            </Modal>
         </ItemContainer>
     )
 }
@@ -44,4 +71,19 @@ export const TodoItems = ({item}: Props) => {
 const ItemContainer = styled.header({
     display: 'flex',
     justifyContent: 'center',
+})
+
+const ModalContentContainer = styled.div({
+    textAlign: 'center',
+})
+
+const TextAreaContainer = styled(TextArea)({
+    width: 1060,
+    height: 600,
+})
+
+const ButtonContainer = styled(Button)({
+    width: 100,
+    height: 50,
+    fontSize: 20,
 })
