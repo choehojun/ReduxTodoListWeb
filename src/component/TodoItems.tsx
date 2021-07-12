@@ -35,19 +35,12 @@ export const TodoItems = ({item}: Props) => {
                 checked={item.isDone}
                 onChange={handleCheckboxChange.bind({}, item)}
             />
-            <text
-                style={{
-                    textDecoration: item.isDone ? 'line-through' : 'none',
-                    fontSize: 15,
-                    fontWeight: 'normal',
-                    width: 125,
-                    textAlign: 'start',
-                    marginLeft: 10,
-                }}
+            <TextContainer
+                style={{textDecoration: item.isDone ? 'line-through' : 'none'}}
                 onClick={() => setIsOpen(true)}
             >
                 {item.text}
-            </text>
+            </TextContainer>
             <Button onClick={handleButtonClick.bind({}, item)}>
                 삭제
             </Button>
@@ -89,4 +82,12 @@ const ButtonContainer = styled(Button)({
     width: 100,
     height: 50,
     fontSize: 20,
+})
+
+const TextContainer = styled.text({
+    fontSize: 15,
+    fontWeight: 'normal',
+    width: 125,
+    textAlign: 'start',
+    marginLeft: 10,
 })
