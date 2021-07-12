@@ -1,5 +1,6 @@
 import {combineReducers, createAction, createSelector, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {generate as generateRandomStr} from 'randomstring'
+import TodosList from '../component/TodosList'
 
 export interface Todo {
     id: string
@@ -18,6 +19,7 @@ const initialState: TodoList = {
 const actionPrefix = 'TODOS'
 const addTodos = createAction<object>(`${actionPrefix}/add`)
 const toggleTodos = createAction<object>(`${actionPrefix}/toggle`)
+const deleteTodos = createAction<object>(`${actionPrefix}/delete`)
 
 const GENERATE_RANDOM_STRING_OPTION = 5
 
@@ -37,6 +39,12 @@ const reducers = {
 
         list[targetIndex].isDone = !isDone
     },
+
+    delete: ({list}: TodoList, {payload: {id}}: PayloadAction<Todo>) => {
+        const targetIndex = list.findIndex((item: Todo) => item.id === id)
+
+        list.splice(targetIndex, 1)
+    }
 }
 
 const todoSlice = createSlice({
@@ -53,6 +61,7 @@ export const selectTodoList = createSelector(
 export const actions = {
     addTodos,
     toggleTodos,
+    deleteTodos,
 }
 
 export const rootReducer = combineReducers({

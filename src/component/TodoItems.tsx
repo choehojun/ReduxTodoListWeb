@@ -15,6 +15,10 @@ export const TodoItems = ({item}: Props) => {
         dispatch(actions.toggleTodos(item))
     }, [dispatch])
 
+    const handleButtonClick = useCallback((item: Todo) => {
+        dispatch(actions.deleteTodos(item))
+    }, [dispatch])
+
     return (
         <ItemContainer>
             <Checkbox onChange={handleCheckboxChange.bind({}, item)}/>
@@ -30,7 +34,9 @@ export const TodoItems = ({item}: Props) => {
             >
                 {item.text}
             </text>
-            <Button>삭제</Button>
+            <Button onClick={handleButtonClick.bind({}, item)}>
+                삭제
+            </Button>
         </ItemContainer>
     )
 }
