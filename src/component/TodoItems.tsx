@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react'
+import React, {useCallback} from 'react'
 import styled from '@emotion/styled'
 import {Checkbox, Button} from 'semantic-ui-react'
 import {actions, Todo} from '../features'

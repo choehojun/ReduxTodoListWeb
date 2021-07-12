@@ -1,6 +1,5 @@
 import {combineReducers, createAction, createSelector, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {generate as generateRandomStr} from 'randomstring'
-import TodosList from '../component/TodosList'
 
 export interface Todo {
     id: string

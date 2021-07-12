@@ -11,6 +11,7 @@ const TodosList = () => {
     return (
         <DivContainer>
             <Header as='h1'>할 일 목록</Header>
+            <Header as='h2'>끝내지 못한 일의 개수: {todoList.filter((item: Todo) => item.isDone === false).length}</Header>
             {todoList.map((item: Todo) => (
                 <TodoItems item={item}/>
             ))}
