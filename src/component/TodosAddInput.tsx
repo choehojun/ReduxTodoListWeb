@@ -24,12 +24,27 @@ const TodosAddInput = () => {
         setInputText('')
     }, [dispatch, inputText, setInputText])
 
+    const handleEnterKeyDown = useCallback((e) => {
+        if (e.keyCode === 13) {
+            if (!inputText.trim()) {
+                alert('할 일을 입력해주세요.')
+                return
+            }
+            dispatch(actions.addTodos({
+                text: inputText,
+                isDone: false,
+            }))
+            setInputText('')
+        }
+    }, [dispatch, inputText, setInputText])
+
     return (
         <DivContainer>
             <Input
                 type='text'
                 value={inputText}
                 onChange={handleInputChange}
+                onKeyDown={handleEnterKeyDown}
                 placeholder='할 일을 입력하세요.'
             />
             <Button onClick={handleButtonClick}>제출</Button>
