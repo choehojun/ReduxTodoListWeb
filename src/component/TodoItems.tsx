@@ -21,10 +21,12 @@ export const TodoItems = ({item}: Props) => {
         dispatch(actions.deleteTodos(item))
     }, [dispatch])
 
-    const handleTextChange = useCallback((memo: string) => {
+    const handleTextChange = useCallback((memo: string, item: Todo) => {
         const copyItem = {
             id: item.id,
-            memo: memo,
+            text: item.text,
+            isDone: item.isDone,
+            memo: memo
         }
         dispatch(actions.memoTodos(copyItem))
     }, [dispatch])
@@ -52,7 +54,7 @@ export const TodoItems = ({item}: Props) => {
                     <TextAreaContainer
                         value={item.memo}
                         onChange={(e) => {
-                            handleTextChange(e.target.value)
+                            handleTextChange(e.target.value, item)
                         }}
                     />
                     <br/>
