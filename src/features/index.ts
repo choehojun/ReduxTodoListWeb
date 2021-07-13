@@ -1,4 +1,12 @@
-import {combineReducers, createAction, createSelector, createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {
+    combineReducers,
+    createAction,
+    createEntityAdapter,
+    createSelector,
+    createSlice,
+    EntityState,
+    PayloadAction,
+} from '@reduxjs/toolkit'
 import {generate as generateRandomStr} from 'randomstring'
 
 export interface Todo {
@@ -9,11 +17,17 @@ export interface Todo {
 }
 
 export interface TodoList {
-    list: Todo[]
+    list: EntityState<Todo>
 }
 
+const todosAdapter = createEntityAdapter<Todo>({
+    selectId: (item) => item.id,
+})
+
+const {selectAll} = todosAdapter.getSelectors()
+
 const initialState: TodoList = {
-    list: [],
+    list: todosAdapter.getInitialState(),
 }
 
 const actionPrefix = 'TODOS'
@@ -33,25 +47,29 @@ const reducers = {
             memo: '',
         }
 
-        list.push(newTodo)
+        todosAdapter.addOne(list, newTodo)
     },
 
     toggle: ({list}: TodoList, {payload: {id, isDone}}: PayloadAction<Todo>) => {
-        const targetIndex = list.findIndex((item: Todo) => item.id === id)
-
-        list[targetIndex].isDone = !isDone
+        todosAdapter.updateOne(list, {
+            id,
+            changes: {
+                isDone: !isDone,
+            },
+        })
     },
 
     delete: ({list}: TodoList, {payload: {id}}: PayloadAction<Todo>) => {
-        const targetIndex = list.findIndex((item: Todo) => item.id === id)
-
-        list.splice(targetIndex, 1)
+        todosAdapter.removeOne(list, id)
     },
 
     memo: ({list}: TodoList, {payload: {id, memo}}: PayloadAction<Todo>) => {
-        const targetIndex = list.findIndex((item: Todo) => item.id === id)
-
-        list[targetIndex].memo = memo
+        todosAdapter.updateOne(list, {
+            id,
+            changes: {
+                memo,
+            },
+        })
     },
 }
 
@@ -63,7 +81,7 @@ const todoSlice = createSlice({
 
 export const selectTodoList = createSelector(
     (state: TodoList) => state.list,
-    (list: Todo[]) => list,
+    (list: EntityState<Todo>) => selectAll(list),
 )
 
 export const actions = {
