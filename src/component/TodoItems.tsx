@@ -55,6 +55,7 @@ export const TodoItems = ({item}: Props) => {
                             handleTextChange(e.target.value)
                         }}
                     />
+                    <br/>
                     <ButtonContainer onClick={() => setIsOpen(false)}>
                         닫기
                     </ButtonContainer>
