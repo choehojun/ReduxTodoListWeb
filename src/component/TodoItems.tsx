@@ -87,7 +87,7 @@ const ButtonContainer = styled(Button)({
     fontSize: 20,
 })
 
-const TextContainer = styled.text({
+const TextContainer = styled.div({
     fontSize: 15,
     fontWeight: 'normal',
     width: 125,
