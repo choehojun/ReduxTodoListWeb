@@ -1,6 +1,5 @@
 import {
     combineReducers,
-    createAction,
     createEntityAdapter,
     createSelector,
     createSlice,
@@ -30,16 +29,10 @@ const initialState: TodoList = {
     list: todosAdapter.getInitialState(),
 }
 
-const actionPrefix = 'TODOS'
-const addTodos = createAction<object>(`${actionPrefix}/add`)
-const toggleTodos = createAction<object>(`${actionPrefix}/toggle`)
-const deleteTodos = createAction<object>(`${actionPrefix}/delete`)
-const memoTodos = createAction<object>(`${actionPrefix}/memo`)
-
 const GENERATE_RANDOM_STRING_OPTION = 5
 
 const reducers = {
-    add: ({list}: TodoList, {payload: {text, isDone}}: PayloadAction<Todo>) => {
+    add: ({list}: TodoList, {payload: {text, isDone}}: PayloadAction<{text: string, isDone: boolean}>) => {
         const newTodo = {
             id: generateRandomStr(GENERATE_RANDOM_STRING_OPTION),
             text,
@@ -50,7 +43,7 @@ const reducers = {
         todosAdapter.addOne(list, newTodo)
     },
 
-    toggle: ({list}: TodoList, {payload: {id, isDone}}: PayloadAction<Todo>) => {
+    toggle: ({list}: TodoList, {payload: {id, isDone}}: PayloadAction<{id: string, isDone: boolean}>) => {
         todosAdapter.updateOne(list, {
             id,
             changes: {
@@ -59,11 +52,11 @@ const reducers = {
         })
     },
 
-    delete: ({list}: TodoList, {payload: {id}}: PayloadAction<Todo>) => {
+    delete: ({list}: TodoList, {payload: {id}}: PayloadAction<{id: string}>) => {
         todosAdapter.removeOne(list, id)
     },
 
-    memo: ({list}: TodoList, {payload: {id, memo}}: PayloadAction<Todo>) => {
+    memo: ({list}: TodoList, {payload: {id, memo}}: PayloadAction<{id: string, memo: string}>) => {
         todosAdapter.updateOne(list, {
             id,
             changes: {
@@ -73,23 +66,16 @@ const reducers = {
     },
 }
 
-const todoSlice = createSlice({
+export const todoSlice = createSlice({
     reducers,
     initialState,
-    name: actionPrefix,
+    name: 'TODOS',
 })
 
 export const selectTodoList = createSelector(
     (state: TodoList) => state.list,
     (list: EntityState<Todo>) => selectAll(list),
 )
-
-export const actions = {
-    addTodos,
-    toggleTodos,
-    deleteTodos,
-    memoTodos,
-}
 
 export const rootReducer = combineReducers({
     todos: todoSlice.reducer,

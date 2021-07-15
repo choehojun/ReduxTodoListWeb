@@ -2,7 +2,7 @@ import React, {ChangeEvent, useCallback, useState} from 'react'
 import {Button, Input} from 'semantic-ui-react'
 import styled from '@emotion/styled'
 import {useDispatch} from 'react-redux'
-import {actions} from '../features'
+import {todoSlice} from '../features'
 
 const TodosAddInput = () => {
     const dispatch = useDispatch()
@@ -17,7 +17,7 @@ const TodosAddInput = () => {
             alert('할 일을 입력해주세요.')
             return
         }
-        dispatch(actions.addTodos({
+        dispatch(todoSlice.actions.add({
             text: inputText,
             isDone: false,
         }))
@@ -30,7 +30,7 @@ const TodosAddInput = () => {
                 alert('할 일을 입력해주세요.')
                 return
             }
-            dispatch(actions.addTodos({
+            dispatch(todoSlice.actions.add({
                 text: inputText,
                 isDone: false,
             }))

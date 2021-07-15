@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react'
 import styled from '@emotion/styled'
 import {Checkbox, Button, TextArea} from 'semantic-ui-react'
-import {actions, Todo} from '../features'
+import {todoSlice, Todo} from '../features'
 import {useDispatch} from 'react-redux'
 import Modal from 'react-modal'
 
@@ -14,11 +14,11 @@ export const TodoItems = ({item}: Props) => {
     const [isOpen, setIsOpen] = useState(false)
 
     const handleCheckboxChange = useCallback((item: Todo) => {
-        dispatch(actions.toggleTodos(item))
+        dispatch(todoSlice.actions.toggle(item))
     }, [dispatch])
 
     const handleButtonClick = useCallback((item: Todo) => {
-        dispatch(actions.deleteTodos(item))
+        dispatch(todoSlice.actions.delete(item))
     }, [dispatch])
 
     const handleTextChange = useCallback((memo: string, item: Todo) => {
@@ -28,7 +28,7 @@ export const TodoItems = ({item}: Props) => {
             isDone: item.isDone,
             memo: memo
         }
-        dispatch(actions.memoTodos(copyItem))
+        dispatch(todoSlice.actions.memo(copyItem))
     }, [dispatch])
 
     return (
