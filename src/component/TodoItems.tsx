@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import {Checkbox, Button, TextArea, Modal} from 'semantic-ui-react'
 import {todoSlice, Todo} from '../features'
 import {useDispatch} from 'react-redux'
+import 'semantic-ui-css/semantic.min.css'
 
 interface Props {
     item: Todo
@@ -45,7 +46,7 @@ export const TodoItems = ({item}: Props) => {
             <Button onClick={handleButtonClick.bind({}, item)}>
                 삭제
             </Button>
-            <ModalContainer
+            <Modal
                 open={isOpen}
                 closeOnDocumentClick={true}
                 onClose={() => setIsOpen(false)}
@@ -62,7 +63,7 @@ export const TodoItems = ({item}: Props) => {
                         닫기
                     </ButtonContainer>
                 </ModalContentContainer>
-            </ModalContainer>
+            </Modal>
         </ItemContainer>
     )
 }
@@ -70,12 +71,7 @@ export const TodoItems = ({item}: Props) => {
 const ItemContainer = styled.header({
     display: 'flex',
     justifyContent: 'center',
-})
-
-const ModalContainer = styled(Modal)({
-    marginTop: 0,
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    marginBottom: 10,
 })
 
 const ModalContentContainer = styled.div({
@@ -85,6 +81,8 @@ const ModalContentContainer = styled.div({
 const TextAreaContainer = styled(TextArea)({
     width: 500,
     height: 300,
+    marginTop: 10,
+    marginBottom: 10,
 })
 
 const ButtonContainer = styled(Button)({
