@@ -10,5 +10,5 @@ export const selectTodoList = createSelector(
 
 export const selectNotDoneTodoList = createSelector(
     (state: TodoList) => state.list,
-    (list: EntityState<Todo>) => selectAll(list).filter((item) => item.isDone === false)
+    (list: EntityState<Todo>) => selectAll(list).filter((item) => item.isDone === false),
 )

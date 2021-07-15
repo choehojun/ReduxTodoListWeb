@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import styled from '@emotion/styled'
-import {Button, Header, Modal} from 'semantic-ui-react'
+import {Button, Modal, TextArea} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import {CheckboxContainer} from '../container/CheckboxContainer'
 import {DeleteButtonContainer} from '../container/DeleteButtonContainer'
-import {TextAreaContainer} from '../container/TextAreaContainer'
+import {ContentTextAreaContainer} from '../container/ContentTextAreaContainer'
+import {TitleTextAreaContainer} from '../container/TitleTextAreaContainer'
 import {Todo} from '../../features'
 
 interface Props {
@@ -13,6 +14,15 @@ interface Props {
 
 export const TodoItems = ({item}: Props) => {
     const [isOpen, setIsOpen] = useState(false)
+
+    const handleClose = () => {
+        if(!item.text.trim()) {
+            alert('할 일을 입력해주세요.')
+            return
+        }
+
+        setIsOpen(false)
+    }
 
     return (
         <ItemContainer>
@@ -24,23 +34,33 @@ export const TodoItems = ({item}: Props) => {
                 {item.text}
             </TextContainer>
             <DeleteButtonContainer item={item}/>
-            <Modal
+            <ModalContainer
                 open={isOpen}
                 closeOnDocumentClick={true}
-                onClose={() => setIsOpen(false)}
+                onClose={handleClose}
                 size='mini'
             >
+                <ModalHeaderContainer>
+                    <TitleTextAreaContainer item={item}/>
+                </ModalHeaderContainer>
                 <ModalContentContainer>
-                    <TextAreaContainer item={item}/>
-                    <br/>
-                    <CloseButtonContainer onClick={() => setIsOpen(false)}>
+                    <ContentTextAreaContainer item={item}/>
+                    <CloseButtonContainer onClick={handleClose}>
                         닫기
                     </CloseButtonContainer>
                 </ModalContentContainer>
-            </Modal>
+            </ModalContainer>
         </ItemContainer>
     )
 }
+
+const ModalContainer = styled(Modal)({
+    height: 500,
+})
+
+const ModalHeaderContainer = styled.div({
+    height: '5%',
+})
 
 const ItemContainer = styled.header({
     display: 'flex',
@@ -50,20 +70,12 @@ const ItemContainer = styled.header({
 
 const ModalContentContainer = styled.div({
     textAlign: 'center',
-})
-
-const TextAreaDivStyle = styled(TextAreaContainer)({
-    width: 500,
-    height: 300,
-    marginTop: 10,
-    marginBottom: 10,
-    resize: 'none',
+    height: '95%',
 })
 
 const CloseButtonContainer = styled(Button)({
-    width: 100,
+    width: 80,
     height: 50,
-    fontSize: 20,
 })
 
 const TextContainer = styled.div({
@@ -72,4 +84,17 @@ const TextContainer = styled.div({
     width: 125,
     textAlign: 'start',
     marginLeft: 10,
+})
+
+export const StyledContentTextArea = styled(TextArea)({
+    width: '100%',
+    height: '85%',
+    marginBottom: 10,
+    resize: 'none',
+})
+
+export const StyledTitleTextArea = styled(TextArea)({
+    width: '100%',
+    resize: 'none',
+    border: 'none',
 })

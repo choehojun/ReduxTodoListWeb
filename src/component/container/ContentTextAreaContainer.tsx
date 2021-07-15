@@ -1,13 +1,13 @@
 import {useDispatch} from 'react-redux'
 import React, {useCallback} from 'react'
 import {Todo, todoSlice} from '../../features'
-import {TextArea} from 'semantic-ui-react'
+import {StyledContentTextArea} from '../presentational/TodoItems'
 
 interface Props {
     item: Todo,
 }
 
-export const TextAreaContainer = ({item}: Props) => {
+export const ContentTextAreaContainer = ({item}: Props) => {
     const dispatch = useDispatch()
 
     const handleTextChange = useCallback((memo: string) => {
@@ -21,7 +21,7 @@ export const TextAreaContainer = ({item}: Props) => {
     }, [dispatch, item])
 
     return (
-        <TextArea
+        <StyledContentTextArea
             value={item.memo}
             onChange={(e) => {
                 handleTextChange(e.target.value)

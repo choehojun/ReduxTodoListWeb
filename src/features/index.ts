@@ -55,6 +55,15 @@ const reducers = {
             },
         })
     },
+
+    changeTitle: ({list}: TodoList, {payload: {id, text}}: PayloadAction<{ id: string, text: string }>) => {
+        todosAdapter.updateOne(list, {
+            id,
+            changes: {
+                text,
+            },
+        })
+    },
 }
 
 export const todoSlice = createSlice({
