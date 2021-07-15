@@ -1,11 +1,4 @@
-import {
-    combineReducers,
-    createEntityAdapter,
-    createSelector,
-    createSlice,
-    EntityState,
-    PayloadAction,
-} from '@reduxjs/toolkit'
+import {createEntityAdapter, createSlice, EntityState, PayloadAction} from '@reduxjs/toolkit'
 import {generate as generateRandomStr} from 'randomstring'
 
 export interface Todo {
@@ -19,11 +12,9 @@ export interface TodoList {
     list: EntityState<Todo>
 }
 
-const todosAdapter = createEntityAdapter<Todo>({
+export const todosAdapter = createEntityAdapter<Todo>({
     selectId: (item) => item.id,
 })
-
-const {selectAll} = todosAdapter.getSelectors()
 
 const initialState: TodoList = {
     list: todosAdapter.getInitialState(),
@@ -71,14 +62,3 @@ export const todoSlice = createSlice({
     initialState,
     name: 'TODOS',
 })
-
-export const selectTodoList = createSelector(
-    (state: TodoList) => state.list,
-    (list: EntityState<Todo>) => selectAll(list),
-)
-
-export const rootReducer = combineReducers({
-    todos: todoSlice.reducer,
-})
-
-export type RootState = ReturnType<typeof rootReducer>
