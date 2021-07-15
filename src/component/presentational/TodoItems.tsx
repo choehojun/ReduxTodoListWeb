@@ -38,7 +38,7 @@ export const TodoItems = ({item}: Props) => {
                 open={isOpen}
                 closeOnDocumentClick={true}
                 onClose={handleClose}
-                size='mini'
+                size='large'
             >
                 <ModalHeaderContainer>
                     <TitleTextAreaContainer item={item}/>
@@ -55,11 +55,11 @@ export const TodoItems = ({item}: Props) => {
 }
 
 const ModalContainer = styled(Modal)({
-    height: 500,
+    height: 900,
 })
 
 const ModalHeaderContainer = styled.div({
-    height: '5%',
+    height: '3%',
 })
 
 const ItemContainer = styled.header({
@@ -70,7 +70,7 @@ const ItemContainer = styled.header({
 
 const ModalContentContainer = styled.div({
     textAlign: 'center',
-    height: '95%',
+    height: '97%',
 })
 
 const CloseButtonContainer = styled(Button)({
@@ -88,7 +88,7 @@ const TextContainer = styled.div({
 
 export const StyledContentTextArea = styled(TextArea)({
     width: '100%',
-    height: '85%',
+    height: '91.5%',
     marginBottom: 10,
     resize: 'none',
 })
