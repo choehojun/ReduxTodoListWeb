@@ -13,15 +13,15 @@ export const TodoItems = ({item}: Props) => {
     const dispatch = useDispatch()
     const [isOpen, setIsOpen] = useState(false)
 
-    const handleCheckboxChange = useCallback((item: Todo) => {
+    const handleCheckboxChange = useCallback(() => {
         dispatch(todoSlice.actions.toggle(item))
-    }, [dispatch])
+    }, [dispatch, item])
 
-    const handleButtonClick = useCallback((item: Todo) => {
+    const handleButtonClick = useCallback(() => {
         dispatch(todoSlice.actions.delete(item))
-    }, [dispatch])
+    }, [dispatch, item])
 
-    const handleTextChange = useCallback((memo: string, item: Todo) => {
+    const handleTextChange = useCallback((memo: string) => {
         const copyItem = {
             id: item.id,
             text: item.text,
@@ -29,13 +29,13 @@ export const TodoItems = ({item}: Props) => {
             memo: memo,
         }
         dispatch(todoSlice.actions.memo(copyItem))
-    }, [dispatch])
+    }, [dispatch, item])
 
     return (
         <ItemContainer>
             <Checkbox
                 checked={item.isDone}
-                onChange={handleCheckboxChange.bind({}, item)}
+                onChange={handleCheckboxChange}
             />
             <TextContainer
                 style={{textDecoration: item.isDone ? 'line-through' : 'none'}}
@@ -43,7 +43,7 @@ export const TodoItems = ({item}: Props) => {
             >
                 {item.text}
             </TextContainer>
-            <Button onClick={handleButtonClick.bind({}, item)}>
+            <Button onClick={handleButtonClick}>
                 삭제
             </Button>
             <Modal
@@ -55,7 +55,7 @@ export const TodoItems = ({item}: Props) => {
                     <TextAreaContainer
                         value={item.memo}
                         onChange={(e) => {
-                            handleTextChange(e.target.value, item)
+                            handleTextChange(e.target.value)
                         }}
                     />
                     <br/>
