@@ -32,7 +32,7 @@ const initialState: TodoList = {
 const GENERATE_RANDOM_STRING_OPTION = 5
 
 const reducers = {
-    add: ({list}: TodoList, {payload: {text, isDone}}: PayloadAction<{text: string, isDone: boolean}>) => {
+    add: ({list}: TodoList, {payload: {text, isDone}}: PayloadAction<{ text: string, isDone: boolean }>) => {
         const newTodo = {
             id: generateRandomStr(GENERATE_RANDOM_STRING_OPTION),
             text,
@@ -43,7 +43,7 @@ const reducers = {
         todosAdapter.addOne(list, newTodo)
     },
 
-    toggle: ({list}: TodoList, {payload: {id, isDone}}: PayloadAction<{id: string, isDone: boolean}>) => {
+    toggle: ({list}: TodoList, {payload: {id, isDone}}: PayloadAction<{ id: string, isDone: boolean }>) => {
         todosAdapter.updateOne(list, {
             id,
             changes: {
@@ -52,11 +52,11 @@ const reducers = {
         })
     },
 
-    delete: ({list}: TodoList, {payload: {id}}: PayloadAction<{id: string}>) => {
+    delete: ({list}: TodoList, {payload: {id}}: PayloadAction<{ id: string }>) => {
         todosAdapter.removeOne(list, id)
     },
 
-    memo: ({list}: TodoList, {payload: {id, memo}}: PayloadAction<{id: string, memo: string}>) => {
+    memo: ({list}: TodoList, {payload: {id, memo}}: PayloadAction<{ id: string, memo: string }>) => {
         todosAdapter.updateOne(list, {
             id,
             changes: {

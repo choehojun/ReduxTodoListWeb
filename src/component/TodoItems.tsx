@@ -1,9 +1,8 @@
 import React, {useCallback, useState} from 'react'
 import styled from '@emotion/styled'
-import {Checkbox, Button, TextArea} from 'semantic-ui-react'
+import {Checkbox, Button, TextArea, Modal} from 'semantic-ui-react'
 import {todoSlice, Todo} from '../features'
 import {useDispatch} from 'react-redux'
-import Modal from 'react-modal'
 
 interface Props {
     item: Todo
@@ -26,7 +25,7 @@ export const TodoItems = ({item}: Props) => {
             id: item.id,
             text: item.text,
             isDone: item.isDone,
-            memo: memo
+            memo: memo,
         }
         dispatch(todoSlice.actions.memo(copyItem))
     }, [dispatch])
@@ -46,9 +45,10 @@ export const TodoItems = ({item}: Props) => {
             <Button onClick={handleButtonClick.bind({}, item)}>
                 삭제
             </Button>
-            <Modal
-                isOpen={isOpen}
-                onRequestClose={() => setIsOpen(false)}
+            <ModalContainer
+                open={isOpen}
+                closeOnDocumentClick={true}
+                onClose={() => setIsOpen(false)}
             >
                 <ModalContentContainer>
                     <TextAreaContainer
@@ -62,7 +62,7 @@ export const TodoItems = ({item}: Props) => {
                         닫기
                     </ButtonContainer>
                 </ModalContentContainer>
-            </Modal>
+            </ModalContainer>
         </ItemContainer>
     )
 }
@@ -72,13 +72,19 @@ const ItemContainer = styled.header({
     justifyContent: 'center',
 })
 
+const ModalContainer = styled(Modal)({
+    marginTop: 0,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+})
+
 const ModalContentContainer = styled.div({
     textAlign: 'center',
 })
 
 const TextAreaContainer = styled(TextArea)({
-    width: 1060,
-    height: 600,
+    width: 500,
+    height: 300,
 })
 
 const ButtonContainer = styled(Button)({
