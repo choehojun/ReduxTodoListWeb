@@ -6,6 +6,7 @@ export interface Todo {
     text: string
     isDone: boolean
     memo: string
+    isLarge: boolean
 }
 
 export interface TodoList {
@@ -29,6 +30,7 @@ const reducers = {
             text,
             isDone,
             memo: '',
+            isLarge: false,
         }
 
         todosAdapter.addOne(list, newTodo)
@@ -61,6 +63,15 @@ const reducers = {
             id,
             changes: {
                 text,
+            },
+        })
+    },
+
+    changeScreenSize: ({list}: TodoList, {payload: {id, isLarge}}: PayloadAction<{ id: string, isLarge: boolean }>) => {
+        todosAdapter.updateOne(list, {
+            id,
+            changes: {
+                isLarge: !isLarge,
             },
         })
     },

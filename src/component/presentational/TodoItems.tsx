@@ -6,6 +6,7 @@ import {CheckboxContainer} from '../container/CheckboxContainer'
 import {DeleteButtonContainer} from '../container/DeleteButtonContainer'
 import {ContentTextAreaContainer} from '../container/ContentTextAreaContainer'
 import {TitleTextAreaContainer} from '../container/TitleTextAreaContainer'
+import {ChangeScreenSizeButtonContainer} from '../container/ChangeScreenSizeButtonContainer'
 import {Todo} from '../../features'
 
 interface Props {
@@ -14,10 +15,9 @@ interface Props {
 
 export const TodoItems = ({item}: Props) => {
     const [isOpen, setIsOpen] = useState(false)
-    const [isLarge, setIsLarge] = useState(false)
 
     const handleClose = () => {
-        if(!item.text.trim()) {
+        if (!item.text.trim()) {
             alert('할 일을 입력해주세요.')
             return
         }
@@ -39,20 +39,18 @@ export const TodoItems = ({item}: Props) => {
                 open={isOpen}
                 closeOnDocumentClick={true}
                 onClose={handleClose}
-                size={isLarge ? 'large' : 'mini'}
-                style={{height: isLarge ? 900 : 500}}
+                size={item.isLarge ? 'large' : 'mini'}
+                style={{height: item.isLarge ? 900 : 500}}
             >
                 <ModalHeaderContainer>
                     <TitleTextAreaContainer item={item}/>
                 </ModalHeaderContainer>
-                <ModalContentContainer style={{height: isLarge ? 873 : 433}}>
+                <ModalContentContainer style={{height: item.isLarge ? 873 : 433}}>
                     <ContentTextAreaContainer item={item}/>
                     <CloseButtonContainer onClick={handleClose}>
                         닫기
                     </CloseButtonContainer>
-                    <ChangeScreenSizeButtonContainer onClick={() => setIsLarge(prev => !prev)}>
-                        {isLarge ? '작은화면' : '큰화면'}
-                    </ChangeScreenSizeButtonContainer>
+                    <ChangeScreenSizeButtonContainer item={item}/>
                 </ModalContentContainer>
             </Modal>
         </ItemContainer>
@@ -78,11 +76,6 @@ const CloseButtonContainer = styled(Button)({
     height: 50,
 })
 
-const ChangeScreenSizeButtonContainer = styled(Button)({
-    width: 100,
-    height: 50,
-})
-
 const TextContainer = styled.div({
     fontSize: 15,
     fontWeight: 'normal',
@@ -102,4 +95,9 @@ export const StyledTitleTextArea = styled(TextArea)({
     width: '100%',
     resize: 'none',
     border: 'none',
+})
+
+export const StyledChangeScreenSizeButtonContainer = styled(Button)({
+    width: 100,
+    height: 50,
 })
