@@ -14,6 +14,7 @@ interface Props {
 
 export const TodoItems = ({item}: Props) => {
     const [isOpen, setIsOpen] = useState(false)
+    const [isLarge, setIsLarge] = useState(false)
 
     const handleClose = () => {
         if(!item.text.trim()) {
@@ -34,32 +35,32 @@ export const TodoItems = ({item}: Props) => {
                 {item.text}
             </TextContainer>
             <DeleteButtonContainer item={item}/>
-            <ModalContainer
+            <Modal
                 open={isOpen}
                 closeOnDocumentClick={true}
                 onClose={handleClose}
-                size='large'
+                size={isLarge ? 'large' : 'mini'}
+                style={{height: isLarge ? 900 : 500}}
             >
                 <ModalHeaderContainer>
                     <TitleTextAreaContainer item={item}/>
                 </ModalHeaderContainer>
-                <ModalContentContainer>
+                <ModalContentContainer style={{height: isLarge ? 873 : 433}}>
                     <ContentTextAreaContainer item={item}/>
                     <CloseButtonContainer onClick={handleClose}>
                         닫기
                     </CloseButtonContainer>
+                    <ChangeScreenSizeButtonContainer onClick={() => setIsLarge(prev => !prev)}>
+                        {isLarge ? '작은화면' : '큰화면'}
+                    </ChangeScreenSizeButtonContainer>
                 </ModalContentContainer>
-            </ModalContainer>
+            </Modal>
         </ItemContainer>
     )
 }
 
-const ModalContainer = styled(Modal)({
-    height: 900,
-})
-
 const ModalHeaderContainer = styled.div({
-    height: '3%',
+    height: 27,
 })
 
 const ItemContainer = styled.header({
@@ -70,11 +71,15 @@ const ItemContainer = styled.header({
 
 const ModalContentContainer = styled.div({
     textAlign: 'center',
-    height: '97%',
 })
 
 const CloseButtonContainer = styled(Button)({
-    width: 80,
+    width: 100,
+    height: 50,
+})
+
+const ChangeScreenSizeButtonContainer = styled(Button)({
+    width: 100,
     height: 50,
 })
 
