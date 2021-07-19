@@ -1,13 +1,14 @@
 import {useDispatch} from 'react-redux'
 import React, {useCallback} from 'react'
 import {Todo, todoSlice} from '../../features'
-import {StyledChangeScreenSizeButtonContainer} from '../presentational/TodoItems'
+import {Button} from 'semantic-ui-react'
 
 interface Props {
-    item: Todo
+    item: Todo,
+    style: React.CSSProperties,
 }
 
-export const ChangeScreenSizeButtonContainer = ({item}: Props) => {
+export const ChangeScreenSizeButtonContainer = ({item, style}: Props) => {
     const dispatch = useDispatch()
 
     const handleButtonClick = useCallback(() => {
@@ -15,8 +16,11 @@ export const ChangeScreenSizeButtonContainer = ({item}: Props) => {
     }, [dispatch, item])
 
     return (
-        <StyledChangeScreenSizeButtonContainer onClick={handleButtonClick}>
+        <Button
+            style={style}
+            onClick={handleButtonClick}
+        >
             {item.isLarge ? '작은화면' : '큰화면'}
-        </StyledChangeScreenSizeButtonContainer>
+        </Button>
     )
 }

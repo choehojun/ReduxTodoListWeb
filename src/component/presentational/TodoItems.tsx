@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import styled from '@emotion/styled'
-import {Button, Modal, TextArea} from 'semantic-ui-react'
+import {Button, Modal} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import {CheckboxContainer} from '../container/CheckboxContainer'
 import {DeleteButtonContainer} from '../container/DeleteButtonContainer'
@@ -43,18 +43,47 @@ export const TodoItems = ({item}: Props) => {
                 style={{height: item.isLarge ? 900 : 500}}
             >
                 <ModalHeaderContainer>
-                    <TitleTextAreaContainer item={item}/>
+                    <TitleTextAreaContainer
+                        item={item}
+                        style={Styles.titleTextArea}
+                    />
                 </ModalHeaderContainer>
                 <ModalContentContainer style={{height: item.isLarge ? 873 : 433}}>
-                    <ContentTextAreaContainer item={item}/>
+                    <ContentTextAreaContainer
+                        item={item}
+                        style={Styles.contentTextArea}
+                    />
                     <CloseButtonContainer onClick={handleClose}>
                         닫기
                     </CloseButtonContainer>
-                    <ChangeScreenSizeButtonContainer item={item}/>
+                    <ChangeScreenSizeButtonContainer
+                        item={item}
+                        style={Styles.changeScreenSizeButton}
+                    />
                 </ModalContentContainer>
             </Modal>
         </ItemContainer>
     )
+}
+
+const Styles: { [key: string]: React.CSSProperties } = {
+    contentTextArea: {
+        width: '100%',
+        height: '91.5%',
+        marginBottom: 10,
+        resize: 'none',
+    },
+
+    titleTextArea: {
+        width: '100%',
+        resize: 'none',
+        border: 'none',
+    },
+
+    changeScreenSizeButton: {
+        width: 100,
+        height: 50,
+    },
 }
 
 const ModalHeaderContainer = styled.div({
@@ -82,22 +111,4 @@ const TextContainer = styled.div({
     width: 125,
     textAlign: 'start',
     marginLeft: 10,
-})
-
-export const StyledContentTextArea = styled(TextArea)({
-    width: '100%',
-    height: '91.5%',
-    marginBottom: 10,
-    resize: 'none',
-})
-
-export const StyledTitleTextArea = styled(TextArea)({
-    width: '100%',
-    resize: 'none',
-    border: 'none',
-})
-
-export const StyledChangeScreenSizeButtonContainer = styled(Button)({
-    width: 100,
-    height: 50,
 })
