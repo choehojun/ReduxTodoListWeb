@@ -108,7 +108,7 @@ const CloseButtonContainer = styled(Button)({
 const TextContainer = styled.div({
     fontSize: 15,
     fontWeight: 'normal',
-    width: 125,
+    width: 250,
     textAlign: 'start',
     marginLeft: 10,
     wordBreak: 'break-word',

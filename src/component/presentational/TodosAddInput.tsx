@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import styled from '@emotion/styled'
 import {InputContainer} from '../container/InputContainer'
 import {SubmitButtonContainer} from '../container/SubmitButtonContainer'
+import {DeleteAllButtonContainer} from '../container/DeleteAllButtonContainer'
 
 const TodosAddInput = () => {
     const [inputText, setInputText] = useState('')
@@ -12,7 +13,11 @@ const TodosAddInput = () => {
                 inputText={inputText}
                 setInputText={setInputText}
             />
-            <SubmitButtonContainer inputText={inputText} setInputText={setInputText}/>
+            <SubmitButtonContainer
+                inputText={inputText}
+                setInputText={setInputText}
+            />
+            <DeleteAllButtonContainer/>
         </DivContainer>
     )
 }

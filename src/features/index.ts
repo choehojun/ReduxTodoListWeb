@@ -49,6 +49,10 @@ const reducers = {
         todosAdapter.removeOne(list, id)
     },
 
+    deleteAll: ({list}: TodoList) => {
+        todosAdapter.removeAll(list)
+    },
+
     memo: ({list}: TodoList, {payload: {id, memo}}: PayloadAction<{ id: string, memo: string }>) => {
         todosAdapter.updateOne(list, {
             id,
