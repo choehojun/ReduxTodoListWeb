@@ -76,6 +76,7 @@ const Styles: { [key: string]: React.CSSProperties } = {
 
     titleTextArea: {
         width: '100%',
+        height: '100%',
         resize: 'none',
         border: 'none',
     },
