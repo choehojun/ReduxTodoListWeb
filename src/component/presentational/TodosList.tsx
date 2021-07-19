@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import {Todo} from '../../features'
+import {Todo} from '../../features/ducks/TodoDucks'
 import {useSelector} from 'react-redux'
 import {TodoItems} from './TodoItems'
 import {Header} from 'semantic-ui-react'
-import {RootState} from '../../features/Root'
-import {selectTodoList, selectNotDoneTodoList} from '../../features/Selector'
+import {RootState} from '../../features/store/Store'
+import {selectTodoList, selectNotDoneTodoList} from '../../features/selector/TodoSelector'
 
 const TodosList = () => {
     const todoList = useSelector<RootState, Todo[]>(state => selectTodoList(state.todos))

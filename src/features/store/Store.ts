@@ -1,5 +1,5 @@
 import {combineReducers} from '@reduxjs/toolkit'
-import {todoSlice} from './index'
+import {todoSlice} from '../ducks/TodoDucks'
 
 export const rootReducer = combineReducers({
     todos: todoSlice.reducer,

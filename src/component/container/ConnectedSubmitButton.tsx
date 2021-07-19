@@ -1,6 +1,6 @@
 import {useDispatch} from 'react-redux'
 import React, {useCallback} from 'react'
-import {todoSlice} from '../../features'
+import {todoSlice} from '../../features/ducks/TodoDucks'
 import {SubmitButton} from '../presentational/SubmitButton'
 
 interface Props {

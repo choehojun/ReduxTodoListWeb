@@ -1,6 +1,6 @@
 import {useDispatch} from 'react-redux'
 import React, {ChangeEvent, useCallback} from 'react'
-import {todoSlice} from '../../features'
+import {todoSlice} from '../../features/ducks/TodoDucks'
 import {TodoInput} from '../presentational/TodoInput'
 
 interface Props {

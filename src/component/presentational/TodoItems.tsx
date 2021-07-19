@@ -7,7 +7,7 @@ import {ConnectedDeleteButton} from '../container/ConnectedDeleteButton'
 import {ConnectedContentTextArea} from '../container/ConnectedContentTextArea'
 import {ConnectedTitleTextArea} from '../container/ConnectedTitleTextArea'
 import {ConnectedChangeScreenSizeButton} from '../container/ConnectedChangeScreenSizeButton'
-import {Todo} from '../../features'
+import {Todo} from '../../features/ducks/TodoDucks'
 
 interface Props {
     item: Todo,
