@@ -1,23 +1,23 @@
 import React, {useState} from 'react'
 import styled from '@emotion/styled'
-import {InputContainer} from '../container/InputContainer'
-import {SubmitButtonContainer} from '../container/SubmitButtonContainer'
-import {DeleteAllButtonContainer} from '../container/DeleteAllButtonContainer'
+import {ConnectedTodoInput} from '../container/ConnectedTodoInput'
+import {ConnectedSubmitButton} from '../container/ConnectedSubmitButton'
+import {ConnectedDeleteAllButton} from '../container/ConnectedDeleteAllButton'
 
 const TodosAddInput = () => {
     const [inputText, setInputText] = useState('')
 
     return (
         <DivContainer>
-            <InputContainer
+            <ConnectedTodoInput
                 inputText={inputText}
                 setInputText={setInputText}
             />
-            <SubmitButtonContainer
+            <ConnectedSubmitButton
                 inputText={inputText}
                 setInputText={setInputText}
             />
-            <DeleteAllButtonContainer/>
+            <ConnectedDeleteAllButton/>
         </DivContainer>
     )
 }

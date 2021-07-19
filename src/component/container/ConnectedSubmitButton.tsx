@@ -1,14 +1,14 @@
 import {useDispatch} from 'react-redux'
 import React, {useCallback} from 'react'
 import {todoSlice} from '../../features'
-import {Button} from 'semantic-ui-react'
+import {SubmitButton} from '../presentational/SubmitButton'
 
 interface Props {
     inputText: string,
     setInputText: (text: string) => void,
 }
 
-export const SubmitButtonContainer = ({inputText, setInputText}: Props) => {
+export const ConnectedSubmitButton = ({inputText, setInputText}: Props) => {
     const dispatch = useDispatch()
 
     const handleButtonClick = useCallback(() => {
@@ -23,5 +23,5 @@ export const SubmitButtonContainer = ({inputText, setInputText}: Props) => {
         setInputText('')
     }, [dispatch, inputText, setInputText])
 
-    return <Button onClick={handleButtonClick}>제출</Button>
+    return <SubmitButton onClick={handleButtonClick}/>
 }

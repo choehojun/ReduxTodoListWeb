@@ -1,14 +1,13 @@
 import {useDispatch} from 'react-redux'
 import React, {useCallback} from 'react'
 import {Todo, todoSlice} from '../../features'
-import {TextArea} from 'semantic-ui-react'
+import {TitleTextArea} from '../presentational/TitleTextArea'
 
 interface Props {
     item: Todo,
-    style: React.CSSProperties
 }
 
-export const TitleTextAreaContainer = ({item, style}: Props) => {
+export const ConnectedTitleTextArea = ({item}: Props) => {
     const dispatch = useDispatch()
 
     const handleTextChange = useCallback((text: string) => {
@@ -22,12 +21,9 @@ export const TitleTextAreaContainer = ({item, style}: Props) => {
     }, [dispatch, item])
 
     return (
-        <TextArea
-            style={style}
+        <TitleTextArea
             value={item.text}
-            onChange={(e) => {
-                handleTextChange(e.target.value)
-            }}
+            onChange={handleTextChange}
         />
     )
 }

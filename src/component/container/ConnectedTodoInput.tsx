@@ -1,14 +1,14 @@
 import {useDispatch} from 'react-redux'
 import React, {ChangeEvent, useCallback} from 'react'
 import {todoSlice} from '../../features'
-import {Input} from 'semantic-ui-react'
+import {TodoInput} from '../presentational/TodoInput'
 
 interface Props {
     inputText: string,
     setInputText: (text: string) => void,
 }
 
-export const InputContainer = ({inputText, setInputText}: Props) => {
+export const ConnectedTodoInput = ({inputText, setInputText}: Props) => {
     const dispatch = useDispatch()
 
     const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -30,12 +30,10 @@ export const InputContainer = ({inputText, setInputText}: Props) => {
     }, [dispatch, inputText, setInputText])
 
     return (
-        <Input
-            type='text'
+        <TodoInput
             value={inputText}
             onChange={handleInputChange}
             onKeyDown={handleEnterKeyDown}
-            placeholder='할 일을 입력하세요.'
         />
     )
 }

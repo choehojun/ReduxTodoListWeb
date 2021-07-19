@@ -2,11 +2,11 @@ import React, {useState} from 'react'
 import styled from '@emotion/styled'
 import {Button, Modal} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
-import {CheckboxContainer} from '../container/CheckboxContainer'
-import {DeleteButtonContainer} from '../container/DeleteButtonContainer'
-import {ContentTextAreaContainer} from '../container/ContentTextAreaContainer'
-import {TitleTextAreaContainer} from '../container/TitleTextAreaContainer'
-import {ChangeScreenSizeButtonContainer} from '../container/ChangeScreenSizeButtonContainer'
+import {ConnectedCompletionCheckbox} from '../container/ConnectedCompletionCheckbox'
+import {ConnectedDeleteButton} from '../container/ConnectedDeleteButton'
+import {ConnectedContentTextArea} from '../container/ConnectedContentTextArea'
+import {ConnectedTitleTextArea} from '../container/ConnectedTitleTextArea'
+import {ConnectedChangeScreenSizeButton} from '../container/ConnectedChangeScreenSizeButton'
 import {Todo} from '../../features'
 
 interface Props {
@@ -27,14 +27,14 @@ export const TodoItems = ({item}: Props) => {
 
     return (
         <ItemContainer>
-            <CheckboxContainer item={item}/>
+            <ConnectedCompletionCheckbox item={item}/>
             <TextContainer
                 style={{textDecoration: item.isDone ? 'line-through' : 'none'}}
                 onClick={() => setIsOpen(true)}
             >
                 {item.text}
             </TextContainer>
-            <DeleteButtonContainer item={item}/>
+            <ConnectedDeleteButton item={item}/>
             <Modal
                 open={isOpen}
                 closeOnDocumentClick={true}
@@ -43,48 +43,24 @@ export const TodoItems = ({item}: Props) => {
                 style={{height: item.isLarge ? 900 : 500}}
             >
                 <ModalHeaderContainer>
-                    <TitleTextAreaContainer
+                    <ConnectedTitleTextArea
                         item={item}
-                        style={Styles.titleTextArea}
                     />
                 </ModalHeaderContainer>
                 <ModalContentContainer style={{height: item.isLarge ? 873 : 433}}>
-                    <ContentTextAreaContainer
+                    <ConnectedContentTextArea
                         item={item}
-                        style={Styles.contentTextArea}
                     />
                     <CloseButtonContainer onClick={handleClose}>
                         닫기
                     </CloseButtonContainer>
-                    <ChangeScreenSizeButtonContainer
+                    <ConnectedChangeScreenSizeButton
                         item={item}
-                        style={Styles.changeScreenSizeButton}
                     />
                 </ModalContentContainer>
             </Modal>
         </ItemContainer>
     )
-}
-
-const Styles: { [key: string]: React.CSSProperties } = {
-    contentTextArea: {
-        width: '100%',
-        height: '91.5%',
-        marginBottom: 10,
-        resize: 'none',
-    },
-
-    titleTextArea: {
-        width: '100%',
-        height: '100%',
-        resize: 'none',
-        border: 'none',
-    },
-
-    changeScreenSizeButton: {
-        width: 100,
-        height: 50,
-    },
 }
 
 const ModalHeaderContainer = styled.div({

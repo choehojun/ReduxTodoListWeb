@@ -1,9 +1,9 @@
 import {useDispatch} from 'react-redux'
 import React, {useCallback} from 'react'
 import {todoSlice} from '../../features'
-import {Button} from 'semantic-ui-react'
+import {DeleteAllButton} from '../presentational/DeleteAllButton'
 
-export const DeleteAllButtonContainer = () => {
+export const ConnectedDeleteAllButton = () => {
     const dispatch = useDispatch()
 
     const handleButtonClick = useCallback(() => {
@@ -11,6 +11,6 @@ export const DeleteAllButtonContainer = () => {
     }, [dispatch])
 
     return (
-        <Button onClick={handleButtonClick}>전체 삭제</Button>
+        <DeleteAllButton onClick={handleButtonClick}/>
     )
 }
