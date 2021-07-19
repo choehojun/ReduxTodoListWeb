@@ -111,4 +111,5 @@ const TextContainer = styled.div({
     width: 125,
     textAlign: 'start',
     marginLeft: 10,
+    wordBreak: 'break-word',
 })
