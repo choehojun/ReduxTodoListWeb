@@ -6,5 +6,12 @@ interface Props {
 }
 
 export const SubmitButton = ({onClick}: Props) => {
-    return <Button onClick={onClick}>제출</Button>
+    return (
+        <Button
+            onClick={onClick}
+            color='green'
+        >
+            제출
+        </Button>
+    )
 }

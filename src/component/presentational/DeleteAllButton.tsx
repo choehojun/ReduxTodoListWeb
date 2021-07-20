@@ -6,5 +6,12 @@ interface Props {
 }
 
 export const DeleteAllButton = ({onClick}: Props) => {
-    return <Button onClick={onClick}>전체 삭제</Button>
+    return (
+        <Button
+            onClick={onClick}
+            color='red'
+        >
+            전체 삭제
+        </Button>
+    )
 }

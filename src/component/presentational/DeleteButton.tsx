@@ -6,5 +6,12 @@ interface Props {
 }
 
 export const DeleteButton = ({onClick}: Props) => {
-    return <Button onClick={onClick}>삭제</Button>
+    return (
+        <Button
+            onClick={onClick}
+            color='red'
+        >
+            삭제
+        </Button>
+    )
 }
