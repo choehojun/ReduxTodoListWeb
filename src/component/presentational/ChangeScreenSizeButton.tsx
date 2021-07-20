@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import {Button} from 'semantic-ui-react'
 import styled from '@emotion/styled'
 
 interface Props {
     isLarge: boolean,
-    onClick: ReturnType<any>
+    onClick: ReturnType<typeof useCallback>
 }
 
 

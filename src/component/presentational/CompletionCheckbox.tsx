@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import {Checkbox} from 'semantic-ui-react'
 
 interface Props {
     checked: boolean,
-    onChange: ReturnType<any>
+    onChange: ReturnType<typeof useCallback>
 }
 
 export const CompletionCheckbox = ({checked, onChange}: Props) => {

@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import {TextArea} from 'semantic-ui-react'
 import styled from '@emotion/styled'
 
 interface Props {
     value: string
-    onChange: ReturnType<any>
+    onChange: ReturnType<typeof useCallback>
 }
 
 export const TitleTextArea = ({value, onChange}: Props) => {

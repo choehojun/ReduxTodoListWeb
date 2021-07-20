@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import {Input} from 'semantic-ui-react'
 
 interface Props {
     value: string,
-    onChange: ReturnType<any>
-    onKeyDown: ReturnType<any>
+    onChange: ReturnType<typeof useCallback>
+    onKeyDown: ReturnType<typeof useCallback>
 }
 
 export const TodoInput = ({value, onChange, onKeyDown}: Props) => {

@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import {Button} from 'semantic-ui-react'
 
 interface Props {
-    onClick: ReturnType<any>
+    onClick: ReturnType<typeof useCallback>
 }
 
 export const DeleteButton = ({onClick}: Props) => {
