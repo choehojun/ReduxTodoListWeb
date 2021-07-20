@@ -12,6 +12,7 @@ export const ContentTextArea = ({value, onChange}: Props) => {
         <TextAreaContainer
             value={value}
             onChange={(e) => onChange(e.target.value)}
+            placeholder='메모를 입력하세요.'
         />
     )
 }

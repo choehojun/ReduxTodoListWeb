@@ -12,6 +12,7 @@ export const TitleTextArea = ({value, onChange}: Props) => {
         <TextAreaContainer
             value={value}
             onChange={(e) => onChange(e.target.value)}
+            placeholder='할 일을 입력하세요.'
         />
     )
 }
