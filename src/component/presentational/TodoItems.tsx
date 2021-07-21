@@ -39,7 +39,7 @@ export const TodoItems = ({item}: Props) => {
     )
 }
 
-const ItemContainer = styled.header({
+const ItemContainer = styled.div({
     display: 'flex',
     justifyContent: 'center',
     marginBottom: 10,
@@ -47,11 +47,11 @@ const ItemContainer = styled.header({
 })
 
 const TextContainer = styled.div({
-    fontSize: 15,
-    fontWeight: 'normal',
+    fontSize: 18,
+    fontWeight: 'bold',
     width: 250,
-    height: 35,
     textAlign: 'start',
     marginLeft: 10,
     wordBreak: 'break-word',
+    padding: 5,
 })
