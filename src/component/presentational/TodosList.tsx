@@ -6,6 +6,7 @@ import {TodoItems} from './TodoItems'
 import {Button, Header} from 'semantic-ui-react'
 import {RootState} from '../../features/store/Store'
 import {selectTodoList, selectNotDoneTodoList, selectDoneTodoList} from '../../features/selector/TodoSelector'
+import TodosAddInput from './TodosAddInput'
 
 const TodosList = () => {
     const todoList = useSelector<RootState, Todo[]>(state => selectTodoList(state.todos))
@@ -20,13 +21,13 @@ const TodosList = () => {
 
     const filteredItemsArray = [
         todoList.map((item: Todo) => (
-            <TodoItems item={item}/>
+            <TodoItems key={item.id} item={item}/>
         )),
         notDoneTodoList.map((item: Todo) => (
-            <TodoItems item={item}/>
+            <TodoItems key={item.id} item={item}/>
         )),
         doneTodoList.map((item: Todo) => (
-            <TodoItems item={item}/>
+            <TodoItems key={item.id} item={item}/>
         )),
     ]
 
@@ -34,6 +35,7 @@ const TodosList = () => {
         <DivContainer>
             <Header as='h1'>할 일 목록</Header>
             <Header as='h2'>끝내지 못한 일의 개수: {notDoneTodoList.length}</Header>
+            <TodosAddInput/>
             <TabContainer>
                 <Button
                     onClick={() => clickHandler(0)}
