@@ -36,26 +36,29 @@ const TodosList = () => {
             <Header as='h1'>할 일 목록</Header>
             <Header as='h2'>끝내지 못한 일의 개수: {notDoneTodoList.length}</Header>
             <TodosAddInput/>
-            <TabContainer>
-                <Button
-                    onClick={() => clickHandler(0)}
-                    color={activeTab === 0 ? 'blue' : 'grey'}
-                >
-                    ALL
-                </Button>
-                <Button
-                    onClick={() => clickHandler(1)}
-                    color={activeTab === 1 ? 'blue' : 'grey'}
-                >
-                    NOT DONE
-                </Button>
-                <Button
-                    onClick={() => clickHandler(2)}
-                    color={activeTab === 2 ? 'blue' : 'grey'}
-                >
-                    DONE
-                </Button>
-            </TabContainer>
+            {
+                todoList.length === 0 ? null :
+                    <TabContainer>
+                        <Button
+                            onClick={() => clickHandler(0)}
+                            color={activeTab === 0 ? 'blue' : 'grey'}
+                        >
+                            ALL
+                        </Button>
+                        <Button
+                            onClick={() => clickHandler(1)}
+                            color={activeTab === 1 ? 'blue' : 'grey'}
+                        >
+                            NOT DONE
+                        </Button>
+                        <Button
+                            onClick={() => clickHandler(2)}
+                            color={activeTab === 2 ? 'blue' : 'grey'}
+                        >
+                            DONE
+                        </Button>
+                    </TabContainer>
+            }
             {filteredItemsArray[activeTab]}
         </DivContainer>
     )
