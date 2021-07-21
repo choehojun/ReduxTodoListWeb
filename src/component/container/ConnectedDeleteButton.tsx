@@ -11,7 +11,9 @@ export const ConnectedDeleteButton = ({item}: Props) => {
     const dispatch = useDispatch()
 
     const handleButtonClick = useCallback(() => {
-        dispatch(todoSlice.actions.delete(item))
+        if(window.confirm('정말 삭제하시겠습니까?')) {
+            dispatch(todoSlice.actions.delete(item))
+        }
     }, [dispatch, item])
 
     return (

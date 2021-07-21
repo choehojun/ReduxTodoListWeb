@@ -7,7 +7,9 @@ export const ConnectedDeleteAllButton = () => {
     const dispatch = useDispatch()
 
     const handleButtonClick = useCallback(() => {
-        dispatch(todoSlice.actions.deleteAll())
+        if(window.confirm('모든 항목이 삭제됩니다. 정말 삭제하시겠습니까?')) {
+            dispatch(todoSlice.actions.deleteAll())
+        }
     }, [dispatch])
 
     return (
