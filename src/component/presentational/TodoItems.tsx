@@ -12,12 +12,19 @@ interface Props {
 
 export const TodoItems = ({item}: Props) => {
     const [isOpen, setIsOpen] = useState(false)
+    const [isMouseOver, setIsMouseOver] = useState<boolean>()
 
     return (
         <ItemContainer>
             <ConnectedCompletionCheckbox item={item}/>
             <TextContainer
-                style={{textDecoration: item.isDone ? 'line-through underline' : 'underline'}}
+                style={{
+                    textDecoration: item.isDone ? 'line-through' : 'none',
+                    backgroundColor: isMouseOver ? 'lightgray' : 'transparent',
+                    color: isMouseOver ? 'white' : 'black',
+                }}
+                onMouseOver={() => setIsMouseOver(true)}
+                onMouseLeave={() => setIsMouseOver(false)}
                 onClick={() => setIsOpen(true)}
             >
                 {item.title}
@@ -43,6 +50,7 @@ const TextContainer = styled.div({
     fontSize: 15,
     fontWeight: 'normal',
     width: 250,
+    height: 35,
     textAlign: 'start',
     marginLeft: 10,
     wordBreak: 'break-word',
