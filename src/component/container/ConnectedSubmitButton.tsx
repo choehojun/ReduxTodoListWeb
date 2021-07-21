@@ -1,6 +1,6 @@
 import {useDispatch} from 'react-redux'
-import React, {useCallback} from 'react'
-import {todoSlice} from '../../features/ducks/TodoDucks'
+import {useCallback} from 'react'
+import {todoActions} from '../../features/ducks/TodoDucks'
 import {SubmitButton} from '../presentational/SubmitButton'
 
 interface Props {
@@ -12,12 +12,12 @@ export const ConnectedSubmitButton = ({inputText, setInputText}: Props) => {
     const dispatch = useDispatch()
 
     const handleButtonClick = useCallback(() => {
-        if (!inputText.trim()) {
+        if (inputText.trim() === '') {
             alert('할 일을 입력해주세요.')
             return
         }
-        dispatch(todoSlice.actions.add({
-            text: inputText,
+        dispatch(todoActions.add({
+            title: inputText,
             isDone: false,
         }))
         setInputText('')

@@ -1,6 +1,6 @@
 import {useDispatch} from 'react-redux'
-import React, {useCallback} from 'react'
-import {Todo, todoSlice} from '../../features/ducks/TodoDucks'
+import {useCallback} from 'react'
+import {Todo, todoActions} from '../../features/ducks/TodoDucks'
 import {CompletionCheckbox} from '../presentational/CompletionCheckbox'
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 export const ConnectedCompletionCheckbox = ({item}: Props) => {
     const dispatch = useDispatch()
     const handleCheckboxChange = useCallback(() => {
-        dispatch(todoSlice.actions.toggle(item))
+        dispatch(todoActions.toggle(item))
     }, [dispatch, item])
 
     return (

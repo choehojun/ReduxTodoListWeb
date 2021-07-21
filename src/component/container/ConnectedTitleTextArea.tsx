@@ -1,6 +1,6 @@
 import {useDispatch} from 'react-redux'
-import React, {useCallback} from 'react'
-import {Todo, todoSlice} from '../../features/ducks/TodoDucks'
+import {useCallback} from 'react'
+import {Todo, todoActions} from '../../features/ducks/TodoDucks'
 import {TitleTextArea} from '../presentational/TitleTextArea'
 
 interface Props {
@@ -10,19 +10,17 @@ interface Props {
 export const ConnectedTitleTextArea = ({item}: Props) => {
     const dispatch = useDispatch()
 
-    const handleTextChange = useCallback((text: string) => {
+    const handleTextChange = useCallback((title: string) => {
         const copyItem = {
             id: item.id,
-            text: text,
-            isDone: item.isDone,
-            memo: item.memo,
+            title: title,
         }
-        dispatch(todoSlice.actions.changeTitle(copyItem))
+        dispatch(todoActions.changeTitle(copyItem))
     }, [dispatch, item])
 
     return (
         <TitleTextArea
-            value={item.text}
+            value={item.title}
             onChange={handleTextChange}
         />
     )

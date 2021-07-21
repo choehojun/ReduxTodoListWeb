@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react'
+import {useCallback} from 'react'
 import {Button} from 'semantic-ui-react'
 import styled from '@emotion/styled'
 

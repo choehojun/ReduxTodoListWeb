@@ -3,7 +3,7 @@ import {generate as generateRandomStr} from 'randomstring'
 
 export interface Todo {
     id: string
-    text: string
+    title: string
     isDone: boolean
     memo: string
     isLarge: boolean
@@ -24,10 +24,10 @@ const initialState: TodoList = {
 const GENERATE_RANDOM_STRING_OPTION = 5
 
 const reducers = {
-    add: ({list}: TodoList, {payload: {text, isDone}}: PayloadAction<{ text: string, isDone: boolean }>) => {
+    add: ({list}: TodoList, {payload: {title, isDone}}: PayloadAction<{ title: string, isDone: boolean }>) => {
         const newTodo = {
             id: generateRandomStr(GENERATE_RANDOM_STRING_OPTION),
-            text,
+            title,
             isDone,
             memo: '',
             isLarge: false,
@@ -62,11 +62,11 @@ const reducers = {
         })
     },
 
-    changeTitle: ({list}: TodoList, {payload: {id, text}}: PayloadAction<{ id: string, text: string }>) => {
+    changeTitle: ({list}: TodoList, {payload: {id, title}}: PayloadAction<{ id: string, title: string }>) => {
         todosAdapter.updateOne(list, {
             id,
             changes: {
-                text,
+                title,
             },
         })
     },
@@ -81,8 +81,11 @@ const reducers = {
     },
 }
 
-export const todoSlice = createSlice({
+const todoSlice = createSlice({
     reducers,
     initialState,
-    name: 'TODOS',
+    name: 'todo',
 })
+
+export const todoActions = todoSlice.actions
+export const todoReducer = todoSlice.reducer

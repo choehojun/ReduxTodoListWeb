@@ -1,7 +1,7 @@
 import {combineReducers} from '@reduxjs/toolkit'
-import {todoSlice} from '../ducks/TodoDucks'
+import {todoReducer} from '../ducks/TodoDucks'
 
 export const rootReducer = combineReducers({
-    todos: todoSlice.reducer,
+    todos: todoReducer,
 })
 export type RootState = ReturnType<typeof rootReducer>

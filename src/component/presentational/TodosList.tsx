@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react'
+import {useCallback, useState} from 'react'
 import styled from '@emotion/styled'
 import {Todo} from '../../features/ducks/TodoDucks'
 import {useSelector} from 'react-redux'

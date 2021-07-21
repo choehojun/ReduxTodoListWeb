@@ -1,6 +1,6 @@
 import {useDispatch} from 'react-redux'
-import React, {useCallback} from 'react'
-import {Todo, todoSlice} from '../../features/ducks/TodoDucks'
+import {useCallback} from 'react'
+import {Todo, todoActions} from '../../features/ducks/TodoDucks'
 import {DeleteButton} from '../presentational/DeleteButton'
 
 interface Props {
@@ -12,7 +12,7 @@ export const ConnectedDeleteButton = ({item}: Props) => {
 
     const handleButtonClick = useCallback(() => {
         if(window.confirm('정말 삭제하시겠습니까?')) {
-            dispatch(todoSlice.actions.delete(item))
+            dispatch(todoActions.delete(item))
         }
     }, [dispatch, item])
 

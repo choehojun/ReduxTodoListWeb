@@ -1,6 +1,6 @@
 import {useDispatch} from 'react-redux'
-import React, {useCallback} from 'react'
-import {Todo, todoSlice} from '../../features/ducks/TodoDucks'
+import {useCallback} from 'react'
+import {Todo, todoActions} from '../../features/ducks/TodoDucks'
 import {ChangeScreenSizeButton} from '../presentational/ChangeScreenSizeButton'
 
 interface Props {
@@ -11,7 +11,7 @@ export const ConnectedChangeScreenSizeButton = ({item}: Props) => {
     const dispatch = useDispatch()
 
     const handleButtonClick = useCallback(() => {
-        dispatch(todoSlice.actions.changeScreenSize(item))
+        dispatch(todoActions.changeScreenSize(item))
     }, [dispatch, item])
 
     return (
